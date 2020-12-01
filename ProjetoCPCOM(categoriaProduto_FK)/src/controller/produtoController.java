@@ -52,4 +52,13 @@ public class produtoController {
         return produtoDAO.delete(produto);
     }
     
+    public ArrayList<Produto> getListaProdutosporDescricao(String descricao){
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        return produtoDAO.getListaProdutoporDescricao(descricao);
+    }
+    
+    public ArrayList<Produto> getListaProdutosporCategoria(String categoria){
+        ProdutoDAO produtoDAO = new ProdutoDAO();
+        return produtoDAO.getListaProdutoporCategoria(categoria);
+    }
 }

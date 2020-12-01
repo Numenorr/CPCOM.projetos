@@ -22,6 +22,8 @@ public class categoriaView extends javax.swing.JFrame {
         initComponents();
         
         DefaultTableModel modeloCategorias = (DefaultTableModel) jTable1.getModel();
+        
+        this.setDefaultCloseOperation(categoriaView.HIDE_ON_CLOSE);
     }
 
     /**
@@ -49,6 +51,9 @@ public class categoriaView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -173,10 +178,10 @@ public class categoriaView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jButton_buscar)
-                    .addComponent(jTextField_busca))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton_buscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextField_busca)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -245,6 +250,11 @@ public class categoriaView extends javax.swing.JFrame {
                     c.getDescricao()});
         }
     }//GEN-LAST:event_jButton_buscarActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        mainMenu mainMenu = new mainMenu();
+        mainMenu.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
 
     /**
      * @param args the command line arguments

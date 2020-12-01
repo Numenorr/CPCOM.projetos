@@ -7,6 +7,7 @@ package view;
 
 import controller.categoriaController;
 import controller.produtoController;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Categoria;
@@ -23,6 +24,7 @@ public class produtoView extends javax.swing.JFrame {
     public produtoView() {
         initComponents();
         DefaultTableModel modeloProdutos = (DefaultTableModel) jTable_produtos.getModel();
+        this.setDefaultCloseOperation(produtoView.HIDE_ON_CLOSE);
     }
     
     public void getListaProdutos(){
@@ -56,6 +58,7 @@ public class produtoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField_descricao = new javax.swing.JTextField();
@@ -70,10 +73,19 @@ public class produtoView extends javax.swing.JFrame {
         jButton_delete = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_produtos = new javax.swing.JTable();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel6 = new javax.swing.JLabel();
+        jRadio_descri = new javax.swing.JRadioButton();
+        jRadio_categoria = new javax.swing.JRadioButton();
+        jTextField_busca = new javax.swing.JTextField();
+        jButton_busca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -141,6 +153,31 @@ public class produtoView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable_produtos);
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setText("Buscar por:");
+
+        buttonGroup1.add(jRadio_descri);
+        jRadio_descri.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jRadio_descri.setText("Descrição");
+        jRadio_descri.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadio_descriActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadio_categoria);
+        jRadio_categoria.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jRadio_categoria.setText("Categoria");
+
+        jButton_busca.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton_busca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Start-Menu-Search-icon.png"))); // NOI18N
+        jButton_busca.setText("Busca");
+        jButton_busca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_buscaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,9 +213,22 @@ public class produtoView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(jSeparator1)
             .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadio_categoria)
+                            .addComponent(jRadio_descri)
+                            .addComponent(jLabel6))
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField_busca, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton_busca)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,7 +236,7 @@ public class produtoView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField_descricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +257,23 @@ public class produtoView extends javax.swing.JFrame {
                     .addComponent(jButton_add)
                     .addComponent(jButton_update)
                     .addComponent(jButton_delete))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(13, 13, 13)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadio_categoria)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jRadio_descri)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField_busca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton_busca))
+                        .addGap(18, 18, 18)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7))
         );
@@ -292,6 +358,40 @@ public class produtoView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_deleteActionPerformed
 
+    private void jRadio_descriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadio_descriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadio_descriActionPerformed
+
+    private void jButton_buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_buscaActionPerformed
+        
+        DefaultTableModel modeloTableProdutos = (DefaultTableModel) jTable_produtos.getModel();
+        modeloTableProdutos.setNumRows(0);
+        
+        ArrayList<Produto> lsProdutosBusca = new ArrayList<>();
+        
+        if(jRadio_descri.isSelected()){
+            lsProdutosBusca = produtoController.getListaProdutosporDescricao(jTextField_busca.getText());
+        }else if(jRadio_categoria.isSelected()){
+            lsProdutosBusca = produtoController.getListaProdutosporCategoria(jTextField_busca.getText());
+        }
+        
+        for (Produto p : lsProdutosBusca){
+            
+            modeloTableProdutos.addRow(new Object[]{
+                p.getId(),
+                p.getDescricao(),
+                p.getQtd(),
+                p.getValor(),
+                p.getCategoria().getDescricao()
+            });
+        }
+    }//GEN-LAST:event_jButton_buscaActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        mainMenu mainMenu = new mainMenu();
+        mainMenu.setVisible(true);
+    }//GEN-LAST:event_formWindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -336,7 +436,9 @@ public class produtoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton_add;
+    private javax.swing.JButton jButton_busca;
     private javax.swing.JButton jButton_delete;
     private javax.swing.JButton jButton_update;
     private javax.swing.JComboBox<Object> jComboBox1;
@@ -345,8 +447,13 @@ public class produtoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JRadioButton jRadio_categoria;
+    private javax.swing.JRadioButton jRadio_descri;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable_produtos;
+    private javax.swing.JTextField jTextField_busca;
     private javax.swing.JTextField jTextField_descricao;
     private javax.swing.JTextField jTextField_qtd;
     private javax.swing.JTextField jTextField_valor;

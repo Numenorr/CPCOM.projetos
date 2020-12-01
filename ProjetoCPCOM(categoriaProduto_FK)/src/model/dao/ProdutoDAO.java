@@ -124,4 +124,78 @@ public class ProdutoDAO{
         }
     }
     
+    //Pesquisa por descricao de produto
+    public ArrayList<Produto> getListaProdutoporDescricao (String descricao){
+       java.sql.Connection con = ConnectionFactory.getConnection();
+       PreparedStatement stmt = null;
+       ResultSet rs = null;
+       
+       ArrayList<Produto> listaProdutos = new ArrayList<>();
+       
+        try{
+            stmt = con.prepareStatement("SELECT p.idproduto, p.descricao as pdesc, qtd, valor, \n" +
+                                        "p.idcategoria as pidcat,c.id as cidcat, c.descricao as cdesc \n" +
+                                        "FROM produtos p INNER JOIN categoria c ON c.id = p.idcategoria WHERE p.descricao LIKE ?\n" +
+                                        "ORDER BY p.idproduto;");
+            stmt.setString(1, "%" + descricao + "%");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Produto prod = new Produto();
+                prod.setId(rs.getInt("idproduto"));
+                prod.setDescricao(rs.getString("pdesc"));
+                prod.setQtd(rs.getInt("qtd"));
+                prod.setValor(rs.getDouble("valor"));
+                
+                Categoria cat = new Categoria();
+                cat.setId(rs.getInt("cidcat"));
+                cat.setDescricao(rs.getString("cdesc"));
+                prod.setCategoria(cat);
+               
+                listaProdutos.add(prod);
+            }
+        }catch(SQLException ex){
+            System.out.println("ERRO");
+        }
+        
+        return listaProdutos;
+    }
+    
+    //Pesquisa por categoria de produto
+    public ArrayList<Produto> getListaProdutoporCategoria (String categoria){
+       java.sql.Connection con = ConnectionFactory.getConnection();
+       PreparedStatement stmt = null;
+       ResultSet rs = null;
+       
+       ArrayList<Produto> listaProdutos = new ArrayList<>();
+       
+        try{
+            stmt = con.prepareStatement("SELECT p.idproduto, p.descricao as pdesc, qtd, valor, \n" +
+                                "p.idcategoria as pidcat,c.id as cidcat, c.descricao as cdesc \n" +
+                                "FROM produtos p INNER JOIN categoria c ON c.id = p.idcategoria WHERE c.descricao LIKE ? \n" +
+                                "ORDER BY p.idproduto;");
+            stmt.setString(1, "%" + categoria + "%");
+            rs = stmt.executeQuery();
+            
+            while(rs.next()){
+                Produto prod = new Produto();
+                prod.setId(rs.getInt("idproduto"));
+                prod.setDescricao(rs.getString("pdesc"));
+                prod.setQtd(rs.getInt("qtd"));
+                prod.setValor(rs.getDouble("valor"));
+                
+                Categoria cat = new Categoria();
+                cat.setId(rs.getInt("cidcat"));
+                cat.setDescricao(rs.getString("cdesc"));
+                prod.setCategoria(cat);
+               
+                listaProdutos.add(prod);
+            }
+        }catch(SQLException ex){
+            System.out.println("ERRO");
+        }
+        
+        return listaProdutos;
+    }
+    
 }
